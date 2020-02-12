@@ -12,18 +12,28 @@
         transition="fade-transition"
         
       ></v-carousel-item>
-    </v-carousel>
+    </v-carousel>   
+    <SearchBar/>
+    <v-row
+      class="mb-6"
+      no-gutters
+    >
+      <v-col
+        v-for="n in 4"
+        :key="n"
+      >
+        <FacilityCard/>
+      </v-col>
+    </v-row>
     
-      <facility-card-component/>
-    
-     
   </v-card>
 </template>
 
 <script>
 import FacilityCard from './FacilityCard'
-
+import SearchBar from './SearchBar'
   export default {
+    name:'Home',
     data () {
       return {
         items: [
@@ -39,9 +49,10 @@ import FacilityCard from './FacilityCard'
           {
             src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
           },
-        ],
-        components:{FacilityCard}
+        ], 
       }
     },
+    components:{FacilityCard,SearchBar},
+    
   }
 </script>

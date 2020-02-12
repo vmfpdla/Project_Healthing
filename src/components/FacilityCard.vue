@@ -69,7 +69,7 @@
 
 <script>
   export default {
-    name: "facility-card-component",
+    name: "FacilityCard",
     data: () => ({
       
       items: [
