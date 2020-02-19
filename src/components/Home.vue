@@ -1,8 +1,7 @@
 <template>
-  <v-card>
+  <v-app>
     <v-carousel
       :cycle="cycle"
-      :show-arrows="false"
     >
       <v-carousel-item
         v-for="(item,i) in items"
@@ -12,8 +11,10 @@
         transition="fade-transition"
         
       ></v-carousel-item>
-    </v-carousel>   
-    <SearchBar/>
+    </v-carousel>
+   
+    <SearchBar class='mt-4' />
+    
     <v-row
       class="mb-6"
       no-gutters
@@ -26,7 +27,7 @@
       </v-col>
     </v-row>
     
-  </v-card>
+  </v-app>
 </template>
 
 <script>

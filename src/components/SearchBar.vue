@@ -1,9 +1,12 @@
 <template>
+  
 	<v-text-field
-			solo
-            label="Search"
-            prepend-inner-icon="mdi-magnify"
+		solo
+    label="Search"
+    prepend-inner-icon="mdi-magnify"
+    clearable
     ></v-text-field>
+ 
 </template>
 
 <script>

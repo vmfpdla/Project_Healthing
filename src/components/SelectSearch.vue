@@ -7,6 +7,7 @@
           :items="dropdown_font"
           label="지역선택"
           item-value="text"
+          target="#dropdown-example"
         ></v-overflow-btn>
       </v-col>
       <v-col cols="12" sm="2">
@@ -46,13 +47,19 @@
       </v-col>
     </v-row>
   </v-container>
-  
 </template>
 
 <script>
   export default {
     data: () => ({
-      dropdown_font: ['Arial', 'Calibri', 'Courier', 'Verdana'],
+      dropdown_font: [
+        {text: 'A'},
+        {text: 'B'},
+        {text: 'C'},
+        {text: 'D'},
+        {text: 'E'},
+      ],
+        
       dropdown_icon: [
         { text: 'list',},
         { text: 'favorite', },
