@@ -1,13 +1,11 @@
 <template>
+<v-app>
   <v-card>
     <v-app-bar
-      color="#3F51B5"
+      color="indigo"
       
-    >
-      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-      
+    > 
       <v-toolbar-title>Healthing</v-toolbar-title>
-      
       
       <v-spacer></v-spacer>
       <v-btn icon>
@@ -15,93 +13,70 @@
       </v-btn>
       
       <template v-slot:extension>
-        <v-tabs v-model='tabs' align-with-title grow>
-          <v-tab>홈</v-tab>
-          <v-tab>시설</v-tab>
-          <v-tab>지도검색</v-tab>
-          <v-tab>커뮤니티</v-tab>
+        <v-tabs v-model='activeTab' align-with-title grow>
+          <v-tab v-for="tab of tabs" :key="tab.id" :to="tab.path" exact>
+           {{ tab.name }}
+          </v-tab>
+          <v-menu
+            v-if="more.length"
+            bottom
+            left
+            
+          >
+            <template v-slot:activator="{ on }">
+              <v-btn
+                text
+                class="align-self-center mr-4"
+                v-on="on"
+              >
+                Community
+                <v-icon right>mdi-menu-down</v-icon>
+              </v-btn>
+            </template>
+
+            <v-list class="grey lighten-3">
+              <v-list-item
+                v-for="item in more"
+                :key="item.id"
+                :to="item.path"
+              >
+                {{ item.name }}
+              </v-list-item>
+            </v-list>
+          </v-menu>
+          <v-tab-item
+            v-for="tab in tabs"
+            :key="tab.id"
+            :value="tab.path"
+          >
+            <router-view></router-view>
+          </v-tab-item>
+          
         </v-tabs>
       </template>
-
-    </v-app-bar>
-
-
-    <v-tabs-items v-model="tabs">
-
-      <v-tab-item>
-        <v-card flat>
-          <Home/>
-        </v-card>
-        
-      </v-tab-item>
-
-      <v-tab-item>
-        <v-card flat>
-          <Facility/>
-        </v-card>
-        
-      </v-tab-item>
-
-      <v-tab-item>
-        <v-card flat>
-          <Map/>
-        </v-card>
-      </v-tab-item>
-
-      <v-tab-item>
-        <v-card flat>
-          <Community/>
-        </v-card>
-      </v-tab-item>
-    </v-tabs-items>
-    <v-navigation-drawer
-      v-model="drawer"
-      absolute
-      temporary
-    >
-      <v-list
-        nav
-        dense
-      >
-        <v-list-item-group
-          v-model="group"
-          active-class="deep-purple--text text--accent-4"
-        >
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-home</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>Home</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-account</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>Account</v-list-item-title>
-          </v-list-item>
-
-        </v-list-item-group>
-      </v-list>
-    </v-navigation-drawer>
+    </v-app-bar>    
   </v-card>
+  </v-app>
 </template>
 
 <script>
-import Home from './components/Home.vue'
-import Facility from './components/Facility.vue'
-import Map from './components/Map.vue'
-import Community from './components/Community.vue'
-
-
   export default {
     
     data () {
       return {
-        drawer: false,
-        tabs: null,
-      }
-    },
-    components:{Home,Facility,Map,Community},
+        activeTab: "./pages/${this.name}",
+        tabs: [
+          { id:1,name: "Home", path:'/home'  },
+          { id:2,name: "Facility", path:'/facility' },
+          { id:3,name: "Map", path:'/map' },
+        ],
+        more:[
+          {id:1,name:"BoardSports", path:'/boardsports'},
+          {id:2,name:"BoardDistrict", path:'/boarddistrict'},
+          {id:3,name:"BoardFree", path:'/boardfree'},
+          {id:4,name:"BoardTeam", path:'/boardteam'},
+        ]
+      };
+    } 
   }
 </script>

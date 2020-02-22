@@ -26,7 +26,7 @@
       </v-col>
 
       <v-col cols="12" sm="2">
-        <v-btn>검색</v-btn>
+        <v-btn class="ma-2" outlined color="indigo">Search</v-btn>
       </v-col>
     </v-row>
   </v-container>

@@ -1,5 +1,5 @@
 <template>
-  <v-container id="dropdown-example">
+  <v-container id="dropdown-example" >
     <v-row>
       <v-col cols="12" sm="2">
         <v-overflow-btn
@@ -41,9 +41,8 @@
           prepend-inner-icon="mdi-magnify"
         ></v-text-field>
       </v-col>
-
       <v-col cols="12" sm="2">
-        <v-btn>검색</v-btn>
+        <v-btn class="ma-2" outlined color="indigo">Search</v-btn>
       </v-col>
     </v-row>
   </v-container>
