@@ -1,29 +1,27 @@
 <template>
-  <v-app>
     <v-container>
         <SearchBar class="mx-auto"/>
         <Sort/>
-        <PostListDistrict/>
+        <PostListSports/>
         <v-row justify="end">
             <v-dialog v-model="dialog" persistent max-width="600px">
-            <template v-slot:activator="{ on }">
-                <v-btn color="primary" dark v-on="on">글쓰기</v-btn>
-            </template>
-            <WriteDistrict @child="parents"/>
+                <template v-slot:activator="{ on }">
+                    <v-btn color="primary" dark v-on="on">글쓰기</v-btn>
+                </template>
+                <WriteSports  @child="parents"/>
             </v-dialog>
         </v-row>
     </v-container>
-  </v-app>
 </template>
 
 <script>
-import PostListDistrict from '../components/PostListDistrict'
+import PostListSports from '../components/PostListSports'
 import SearchBar from '../components/SearchBar'
 import Sort from '../components/Sort'
-import WriteDistrict from '../components/WritePost/WriteDistrict'
+import WriteSports from '../components/WritePost/WriteSports'
     export default {
-        name: "Community",
-        components:{PostListDistrict,SearchBar,Sort,WriteDistrict},
+        name: "BoardSports",
+        components:{SearchBar,Sort,PostListSports,WriteSports},
         data: () => ({
             dialog:false,
         }),
@@ -32,6 +30,5 @@ import WriteDistrict from '../components/WritePost/WriteDistrict'
                 this.dialog = message;
             }
         }
-        
     }
 </script>

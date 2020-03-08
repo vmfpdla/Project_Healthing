@@ -2,8 +2,8 @@
   <div>
     <div style="width: 800px">
       <vue-table-dynamic 
-      :params="params" 
-      ref="table"
+        :params="params" 
+        ref="table"
       >
       </vue-table-dynamic>
     </div>			
@@ -12,9 +12,8 @@
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic' // 외부 컴포넌트 이용
-const random = () => { // 랜덤으로 값을 생성하기위해서 해놈 => 나중에 제대로 데이터 넣어야함.
-  return parseInt(Date.now() + Math.random() * 10000000).toString(16).slice(-6)
-}
+import axios from 'axios'
+
 
 export default {
   name: 'PostListSports',
@@ -34,9 +33,12 @@ export default {
     }
   },
   mounted () {
-    for (let i = 0; i < 100; i++) {
-      this.params.data.push([i+1, `${random()}`, `${random()}`, `${random()}`])
-    }
+    axios.get('/api/print_PostSportsList')
+      .then((response) => {
+        for (let i = 0; i < response.data.length; i++) {
+          this.params.data.push([i+1, response.data[i].board_title,response.data[i].user_id,response.data[i].board_date])
+        }
+      })
   },
   components: { VueTableDynamic}
 }

@@ -1,99 +1,119 @@
 <template>
-<v-app>
   <v-container fluid>
-    <v-row>
-      <input type="file" accept="image/*" @change="onChange" />
-        <div id="preview">
-          <img v-if="item.imageUrl" :src="item.imageUrl" />
-        </div>
-    </v-row>
-    <v-row>
-      <v-col cols="4">
-        <v-subheader>Open Talk Link</v-subheader>
-      </v-col>
-      <v-col cols="8">
-        <v-text-field
-          label="Link"
-          prefix="https://"
-        ></v-text-field>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-subheader> 활동 요일 </v-subheader>
-      <v-card-text>
-        <v-chip-group
-          v-model="selection"
-          active-class="deep-purple--text text--accent-4"
-          column
-          multiple
-        >
-          <v-chip filter>월</v-chip>
-          <v-chip filter>화</v-chip>
-          <v-chip filter>수</v-chip>
-          <v-chip filter>목</v-chip>
-          <v-chip filter>금</v-chip>
-          <v-chip filter>토</v-chip>
-          <v-chip filter>일</v-chip>
-        </v-chip-group>
-      </v-card-text>
-    </v-row>
-    <v-row>
-      <v-col cols="4">
-        <v-subheader>활동 시간</v-subheader>
-      </v-col>
-      <v-col cols="8">
-        
-        <v-text-field
-          label="활동 시간"
-          value="12:30:00"
-          type="time"
-          suffix="PST"
-        ></v-text-field>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="4">
-        <v-subheader>팀 이름</v-subheader>
-      </v-col>
-      <v-col cols="8">
-        <v-text-field
-          label="Team Name"
-        ></v-text-field>
-      </v-col>
-    </v-row>
+    <v-card>
+      <v-row class="mx-auto">
+        <v-card-title>팀 만들기</v-card-title>
+      </v-row>
+      <v-row class="mx-auto">
+        <form> 
+          <input 
+            type="file" 
+            id="ex_file" 
+            ref='uploadImageFile' 
+            @change="onFileSelected" 
+            accept="image/*"> 
+        </form>
+      </v-row>
+      <v-row>
+        <v-col cols="4">
+          <v-card-subtitle>Open Talk Link</v-card-subtitle>
+        </v-col>
+        <v-col cols="8">
+          <v-text-field
+            label="Link"
+            prefix="https://"
+          ></v-text-field>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-card-subtitle> 활동 요일 </v-card-subtitle>
+        <v-card-text>
+          <v-chip-group
+            align='center'
+            v-model="selection"
+            active-class="deep-purple--text text--accent-4"
+            column
+            multiple
+          >
+            <v-chip filter>월</v-chip>
+            <v-chip filter>화</v-chip>
+            <v-chip filter>수</v-chip>
+            <v-chip filter>목</v-chip>
+            <v-chip filter>금</v-chip>
+            <v-chip filter>토</v-chip>
+            <v-chip filter>일</v-chip>
+          </v-chip-group>
+        </v-card-text>
+      </v-row>
+      <v-row>
+        <v-col cols="4">
+          <v-card-subtitle>활동 시간</v-card-subtitle>
+        </v-col>
+        <v-col cols="8">
+          
+          <v-text-field
+            label="활동 시간"
+            value="12:30:00"
+            type="time"
+            suffix="PST"
+          ></v-text-field>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="4">
+          <v-card-subtitle>팀 이름</v-card-subtitle>
+        </v-col>
+        <v-col cols="8">
+          <v-text-field
+            label="Team Name"
+          ></v-text-field>
+        </v-col>
+      </v-row>
 
-    <v-row>
-      <v-col cols="4">
-        <v-subheader>팀 설명</v-subheader>
-      </v-col>
-      <v-col cols="8">
-        <v-text-field
-          label="Team Description"
-        ></v-text-field>
-      </v-col>
-    </v-row>
+      <v-row>
+        <v-col cols="4">
+          <v-card-subtitle>팀 설명</v-card-subtitle>
+        </v-col>
+        <v-col cols="8">
+          <v-text-field
+            label="Team Description"
+          ></v-text-field>
+        </v-col>
+      </v-row>
+      <v-card-actions>
+        <v-spacer/>
+          <v-btn color="blue darken-1" text @click="update">Close</v-btn>
+          <v-btn color="blue darken-1" text @click="update">Save</v-btn>
+        </v-card-actions>
+    </v-card>
   </v-container>
-  <v-app>
 </template>
 
 <script>
+import axios from 'axios'
     export default {
-        name:'imageUpload',
+        name:'MakeTeam',
         data(){
             return {
-              item:{
-    
-                image : null,
-                imageUrl: null
-              }
+              dialog:false,
+              uploadImageFile: "",
             }
         },
         methods:{
-            onChange(e) {
-              const file = e.target.files[0]
-              this.image = file
-              this.item.imageUrl = URL.createObjectURL(file)
-            }    
+            onFileSelected(event){ 
+              this.uploadImageFile = event.target.files[0];
+              console.log(this.uploadImageFile);
+            },
+            async onSave(){
+               const fd = new FormData(); //반드시 필요 
+               fd.append('upLoadImage', this.uploadImageFile); //4번 
+               await axios.post('API주소',fd); 
+            },
+            update(){
+                // 자식 컴포넌트에서 부모 컴포넌트로 보내는 것이 $emit()
+                this.dialog = false;
+                this.$emit("child",this.dialog)
+            },
         }
     }  // missing closure added
 </script>

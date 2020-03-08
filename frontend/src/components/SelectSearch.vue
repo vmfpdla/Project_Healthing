@@ -127,7 +127,6 @@ import axios from 'axios'
     methods : {
       add_fun(add1){
         this.dropdown_add2=[];
-        console.log(this.dropdown_add2);
         axios.get('/api/select_add')
           .then((response) => {
             if(add1=="서울시"){
