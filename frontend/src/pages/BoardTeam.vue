@@ -61,7 +61,7 @@ import axios from 'axios';
                     this.Teams.push(response.data[i]);
                     this.loading = true;
                 }
-                console.log(this.Teams);
+                console.log("^^"+this.Teams);
             })
         },
         methods:{

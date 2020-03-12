@@ -64,7 +64,7 @@
                     title: [val => (val || '').length > 0 || 'This field is required'],
                     post: [val => (val || '').length > 0 || 'This field is required'],
                 },
-                category: ['수영', '헬스', '필라테스&요갈', '구기종목', '그 외'],
+                category: ['수영', '헬스', '필라테스&요가', '구기종목', '그 외'],
                 defaultForm,
             }
         },

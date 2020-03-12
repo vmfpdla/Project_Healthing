@@ -5,14 +5,14 @@
         <v-card-title>팀 만들기</v-card-title>
       </v-row>
       <v-row class="mx-auto">
-        <form> 
+        
           <input 
             type="file" 
-            id="ex_file" 
-            ref='uploadImageFile' 
+            id="team-image"
+            name="team-image"
             @change="onFileSelected" 
             accept="image/*"> 
-        </form>
+        
       </v-row>
       <v-row>
         <v-col cols="4">
@@ -83,37 +83,45 @@
       <v-card-actions>
         <v-spacer/>
           <v-btn color="blue darken-1" text @click="update">Close</v-btn>
-          <v-btn color="blue darken-1" text @click="update">Save</v-btn>
+          <v-btn color="blue darken-1" text @click="onSave">Save</v-btn>
         </v-card-actions>
     </v-card>
   </v-container>
 </template>
 
 <script>
-import axios from 'axios'
-    export default {
-        name:'MakeTeam',
-        data(){
-            return {
-              dialog:false,
-              uploadImageFile: "",
-            }
-        },
-        methods:{
-            onFileSelected(event){ 
-              this.uploadImageFile = event.target.files[0];
-              console.log(this.uploadImageFile);
-            },
-            async onSave(){
-               const fd = new FormData(); //반드시 필요 
-               fd.append('upLoadImage', this.uploadImageFile); //4번 
-               await axios.post('API주소',fd); 
-            },
-            update(){
-                // 자식 컴포넌트에서 부모 컴포넌트로 보내는 것이 $emit()
-                this.dialog = false;
-                this.$emit("child",this.dialog)
-            },
-        }
-    }  // missing closure added
+import axios from 'axios';
+export default {
+  name:'MakeTeam',
+  data(){
+      return {
+        dialog:false,
+        uploadImageFile: "",
+      }
+  },
+  methods:{
+      onFileSelected(event){ 
+        this.uploadImageFile = event.target.files[0]; //3번
+      },
+      async onSave(){
+          const fd = new FormData(); //반드시 필요 
+          fd.append('team-image', this.uploadImageFile); //4번 
+          
+          await axios.post('/api/make_team',fd)
+          .then((res)=>{
+            console.log("결과 : "+ res);
+          })
+          .catch((e)=>{
+            console.log("에러 : "+e);
+          })
+          this.dialog = false;
+          this.$emit("child",this.dialog)
+      },
+      update(){
+          // 자식 컴포넌트에서 부모 컴포넌트로 보내는 것이 $emit()
+          this.dialog = false;
+          this.$emit("child",this.dialog)
+      },
+  }
+}  // missing closure added
 </script>

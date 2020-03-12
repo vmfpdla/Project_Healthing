@@ -34,7 +34,7 @@ import VueDaumMap from 'vue-daum-map'
 
 export default {
      data: () => ({
-        appKey: '86be95f1c16e5e4fdd3d8e24499c50bb', // 테스트용 appkey
+        appKey: '86be95f1c16e5e4fdd3d8e24499c50bbx', // 테스트용 appkey
         center: {lat:33.450701, lng:126.570667}, // 지도의 중심 좌표
         level: 3, // 지도의 레벨(확대, 축소 정도),
         mapTypeId: VueDaumMap.MapTypeId.NORMAL, // 맵 타입

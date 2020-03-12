@@ -12,7 +12,7 @@ var print_PostDistrictListRouter = require('./routes/print_PostDistrictList');
 var print_PostFreeListRouter = require('./routes/print_PostFreeList');
 var print_PostTeamListRouter = require('./routes/print_PostTeamList');
 var usersRouter = require('./routes/users');
-
+var makeTeamRouter = require('./routes/make_team')
 var app = express();
 
 var mysqlDB = require('./routes/mysql_db');
@@ -36,6 +36,7 @@ app.use('/api/print_PostFreeList', print_PostFreeListRouter);
 app.use('/api/print_PostTeamList', print_PostTeamListRouter);
 app.use('/api/select_add', select_addRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/make_team', makeTeamRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
