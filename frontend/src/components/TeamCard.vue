@@ -4,7 +4,7 @@
     max-width="344"
   >
     <v-img
-      src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+      src="senddata.team_image"
       height="200px"
     ></v-img>
 
@@ -18,20 +18,20 @@
         >
           <v-chip
             class = "ma-2"
-            v-if = "this.day.mon!=null"
+            v-if = "this.day.mon!='00:00:00'"
             color="orange"
             text-color="white"
           >
             월
           </v-chip>
-          <v-card-subtitle  class="text-center">{{senddata.mon}}</v-card-subtitle>
+          <v-card-subtitle  class="text-center" v-if = "this.day.mon!='00:00:00'">{{senddata.mon}}</v-card-subtitle>
         </v-row>
       </v-col>
         <v-col>
         <v-row>
           <v-chip
             class="ma-2"
-            v-if = "this.day.tue!=null"
+            v-if = "this.day.tue!='00:00:00'"
             color="orange"
             text-color="white"
           >
@@ -39,14 +39,14 @@
           </v-chip>
         </v-row>
         <v-row>
-          <v-card-subtitle>{{senddata.tue}}</v-card-subtitle>
+          <v-card-subtitle v-if = "this.day.tue!='00:00:00'">{{senddata.tue}}</v-card-subtitle>
         </v-row>
       </v-col>
         <v-col>
         <v-row>
           <v-chip
             class="ma-2"
-            v-if = "this.day.wed!=null"
+            v-if = "this.day.wed!='00:00:00'"
             color="orange"
             text-color="white"
           >
@@ -54,14 +54,14 @@
           </v-chip>
         </v-row>
         <v-row>
-          <v-card-subtitle>{{senddata.wed}}</v-card-subtitle>
+          <v-card-subtitle v-if = "this.day.wed!='00:00:00'">{{senddata.wed}}</v-card-subtitle>
         </v-row>
       </v-col>
         <v-col>
         <v-row>
           <v-chip
             class="ma-2"
-            v-if = "this.day.thr!=null"
+            v-if = "this.day.thr!='00:00:00'"
             color="orange"
             text-color="white"
           >
@@ -69,14 +69,14 @@
           </v-chip>
         </v-row>
         <v-row>
-          <v-card-subtitle>{{senddata.thr}}</v-card-subtitle>
+          <v-card-subtitle v-if = "this.day.thr!='00:00:00'">{{senddata.thr}}</v-card-subtitle>
         </v-row>
       </v-col>
         <v-col>
         <v-row>
           <v-chip
             class="ma-2"
-            v-if = "this.day.fri!=null"
+            v-if = "this.day.fri!='00:00:00'"
             color="orange"
             text-color="white"
           >
@@ -84,14 +84,14 @@
           </v-chip>
         </v-row>
         <v-row>
-          <v-card-subtitle>{{senddata.fri}}</v-card-subtitle>
+          <v-card-subtitle v-if = "this.day.fri!='00:00:00'">{{senddata.fri}}</v-card-subtitle>
         </v-row>
       </v-col>
         <v-col>
         <v-row>
           <v-chip
             class="ma-2"
-            v-if = "this.day.sat!=null"
+            v-if = "this.day.sat!='00:00:00'"
             color="orange"
             text-color="white"
           >
@@ -99,14 +99,14 @@
           </v-chip>
         </v-row>
         <v-row>
-          <v-card-subtitle>{{senddata.sat}}</v-card-subtitle>
+          <v-card-subtitle  v-if = "this.day.sat!='00:00:00'">{{senddata.sat}}</v-card-subtitle>
         </v-row>
       </v-col>
         <v-col>
         <v-row>
           <v-chip
             class="ma-2"
-            v-if = "this.day.sun!=null"
+            v-if = "this.day.sun!='00:00:00'"
             color="orange"
             text-color="white"
           >
@@ -114,7 +114,7 @@
           </v-chip>
         </v-row>
         <v-row>
-          <v-card-subtitle>{{senddata.sun}}</v-card-subtitle>
+          <v-card-subtitle  v-if = "this.day.sun!='00:00:00'">{{senddata.sun}}</v-card-subtitle>
         </v-row>
       </v-col>
     </v-row>
