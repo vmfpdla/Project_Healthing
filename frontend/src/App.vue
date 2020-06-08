@@ -3,14 +3,27 @@
    <v-card>
     <v-app-bar
       color="indigo"
-    > 
+    >
       <v-toolbar-title>Healthing</v-toolbar-title>
-      
+
+      <v-spacer></v-spacer>
       <v-spacer></v-spacer>
       <v-btn icon>
-        <v-icon>mdi-login</v-icon>
+        <v-icon>person</v-icon>
       </v-btn>
-    
+      <!--  person btn : 마이페이지용 -->
+      <v-btn text
+      v-on:click="LoginClick">
+        Login
+      </v-btn>
+      <v-sheet color="indigo">
+        |
+      </v-sheet>
+      <v-btn text
+      v-on:click="SigninClick">
+        Join US
+      </v-btn>
+
       <template v-slot:extension>
         <v-tabs v-model='activeTab' align-with-title grow>
           <v-tab v-for="tab of tabs" :key="tab.id" :to="tab.path" exact>
@@ -20,7 +33,7 @@
             v-if="more.length"
             bottom
             left
-            
+
           >
             <template v-slot:activator="{ on }">
               <v-btn
@@ -49,7 +62,7 @@
           >
           </v-tab-item>
           </v-tabs>
-        </template>   
+        </template>
         </v-app-bar>
         <v-container>
               <router-view></router-view>
@@ -60,7 +73,7 @@
 
 <script>
   export default {
-    
+
     data () {
       return {
         activeTab: "./pages/${this.name}",
@@ -76,8 +89,14 @@
           {id:4,name:"BoardTeam", path:'/boardteam'},
         ]
       };
-    } 
+    },
+    methods:{
+      LoginClick: function(){
+        this.$router.push({path:'/login'})
+      },
+      SigninClick: function(){
+        this.$router.push({path:'/signin'})
+      }
+    }
   }
 </script>
-
-
